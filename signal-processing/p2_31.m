@@ -1,0 +1,20 @@
+clear all; close all;
+load('SemmlowFiles\Chapter 2\bandwidths.mat');
+plot(x,'k');
+hold on;
+plot(y, 'g');
+legend({'Narrowband Signal','Broadband Signal'},'FontSize',18);
+%%
+[rxx,lags1] = xcorr(x); 
+[ryy,lags2] = xcorr(y); 
+lags1 = lags1(971:1031);   
+lags2 = lags2(971:1031);
+rxx = rxx(971:1031);
+ryy = ryy(971:1031);
+figure;
+subplot(2,1,1);
+plot(lags1,rxx);
+title('Narrowband signal autocorrelation');
+subplot(2,1,2);
+plot(lags2,ryy);
+title('Broadband signal autocorrelation');
