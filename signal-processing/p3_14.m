@@ -1,4 +1,4 @@
-% Exercício 3.14
+% Exercício 3.14 - aliasing
 clearvars; close all; clc;
 
 N = 512;

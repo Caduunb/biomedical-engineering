@@ -1,10 +1,10 @@
-% Exercício 3.24
+% Exercício 3.24 - Welch application
 clearvars; close all; clc
 
 load ('p2_36data.mat')
 
 fs = 200;                   % sampling frequency 
-N  = 512;                    % points
+N  = 512;                   % points
 freq_vec = 0:(fs/N):fs/2;   % frequency vector
 %% Power Spectrum
 [gaussPS_avg32,freq_vector32]  = pwelch(gauss_noise,32);

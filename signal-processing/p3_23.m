@@ -1,4 +1,4 @@
-% Exercício 3.23
+% Exercício 3.23 - filtered gaussian noise
 clearvars; close all; clc
 
 load ('p2_36data.mat')
