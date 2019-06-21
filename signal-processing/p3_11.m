@@ -16,9 +16,11 @@ phase_fourier_signal = rad2deg(angle(fourier_signal));
 figure(1)
 for cont = 1:3
     hold on;
-    plot(signal(:, cont));
+    plot(signal(:, cont), 'LineWidth', 2);
     if cont == 3
         legend('x1', 'x2', 'x3');
+        ylabel('x(t)')
+        xlabel('Time (ms)')
     end
 end
 
@@ -27,15 +29,19 @@ poi = 251;
 for cont = 1:3
     subplot(2,1,1);    hold on;
     title('Freq x Mag');
-    plot(freq_vec(1:poi), mag_fourier_signal(1:poi,cont));
+    plot(freq_vec(1:poi), mag_fourier_signal(1:poi,cont), 'LineWidth', 2);
     if cont == 3
         legend('x1', 'x2', 'x3');
+        xlabel('Frequency (Hz)')
+        ylabel('|x(f)|')
     end
     
     subplot(2,1,2);    hold on;
     title('Freq x Phase');
-    plot(freq_vec(1:poi), phase_fourier_signal(1:poi,cont));
+    plot(freq_vec(1:poi), phase_fourier_signal(1:poi,cont), 'LineWidth', 2);
     if cont == 3
         legend('x1', 'x2', 'x3');
+        xlabel('Frequency (Hz)')
+        ylabel('Phase (deg)')
     end
 end

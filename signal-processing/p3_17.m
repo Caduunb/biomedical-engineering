@@ -4,6 +4,7 @@ clearvars; close all; clc;
 load SemmlowFiles\'Chapter 3'\short.mat
 
 x = x';
+figure(1);
 plot(x); hold on;
 %% Fourier
 xfourier = fft(x);
@@ -15,7 +16,7 @@ phase_xfourier = rad2deg(angle(xfourier));
 mag_xpadfourier = abs(xpadfourier);
 phase_xpadfourier = rad2deg(angle(xpadfourier));
 %% Plot
-figure(1)
+figure(2)
 subplot(2,1,1);    hold on;
 title('Freq x Mag');
 plot(mag_xfourier);
@@ -24,7 +25,7 @@ subplot(2,1,2);    hold on;
 title('Freq x Phase');
 plot(phase_xfourier);
 
-figure(2);
+figure(3);
 subplot(2,1,1);    hold on;
 title('Freq x Mag');
 plot(mag_xpadfourier);
