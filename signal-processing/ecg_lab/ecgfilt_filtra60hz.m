@@ -10,7 +10,7 @@ ganho=1;
 
 %angulos de colocacao de polos e zeros
 fo=[];
-for k=60:60:samplerate_ecg/2,
+for k=60:60:samplerate_ecg/2
    fo=[fo;k];
 end
 theta=fo*pi/(samplerate_ecg/2);
