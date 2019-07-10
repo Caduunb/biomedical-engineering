@@ -14,12 +14,12 @@ freq_vec = 0:fs/N:fs/2;
 % Generate Signal
 x = sin(2*pi*f(1)*t) + sin(2*pi*f(1)*t);
 
-% Generate White Noise
-SNR = -10;                   % signal-noise ration in dB
-SNR = 10^(SNR/10);           % SNR to linear scale
-Esym=sum(abs(x).^2)/(N);     % Calculate actual symbol energy
-var=Esym/SNR;                % Find the noise spectral density
-sigma = sqrt(var);           % variance equals 4
+% Generate White Noise with SNR
+SNR     = -10;                      % signal-noise ration in dB
+SNR     = 10^(SNR/10);              % SNR to linear scale
+Esym    = sum(abs(x).^2)/(N);       % Calculate actual symbol energy
+var     = Esym/SNR;                 % Find the noise spectral density
+sigma   = sqrt(var);                % variance equals 4
 gaussiannoise = sigma*randn(N, 1);
 
 % Generate signal with added noise
