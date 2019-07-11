@@ -1,7 +1,7 @@
 % Cria banco de dados
 clearvars; close all; clc;
 
-interval = 500;
+interval = 5000;
 sigma    = 2;           % standard deviation
 ruido = sigma*randn(interval, 1);
 
@@ -33,13 +33,18 @@ gain_y10 = 409.6;
 ecg_y10 = ecg(800001:800001 + interval - 1)'/gain_y10;
 resp_y10 = resp(800001:800001 + interval - 1)'/gain_y10;
 
-
 % Adiciona ruído aos sinais
-ecg_y8 = ecg_y8 + ruido;
-ecg_y10 = ecg_y10 + ruido;
-ecg_o8 = ecg_o8 + ruido;
-ecg_o10 = ecg_o10 + ruido;
+ecg_y8ruido      = ecg_y8 + ruido;
+ecg_y10ruido     = ecg_y10 + ruido;
+ecg_o8ruido      = ecg_o8 + ruido;
+ecg_o10ruido     = ecg_o10 + ruido;
+resp_y8ruido     = resp_y8 + ruido;
+resp_y10ruido    = resp_y10 + ruido;
+resp_o8ruido     = resp_o8 + ruido;
+resp_o10ruido    = resp_o10 + ruido;
 
 % Save
-save ('dadosApresentacao', 'ecg_o8', 'ecg_o10', 'resp_o8', 'resp_o10', 'ecg_y8', 'ecg_y10', 'resp_y8', 'resp_y10');
-save ('dadosApresentacaoRuido', 'ecg_o8ruido', 'ecg_o10ruido', 'resp_o8ruido', 'resp_o10ruido', 'ecg_y8ruido', 'ecg_y10ruido', 'resp_y8ruido', 'resp_y10ruido');
+save ('dadosPhysionet', 'ecg_o8', 'ecg_o10', 'resp_o8', 'resp_o10', 'ecg_y8', 'ecg_y10', 'resp_y8', 'resp_y10');
+save ('dadosPhysionetRuido', 'ecg_o8ruido', 'ecg_o10ruido', 'resp_o8ruido', 'resp_o10ruido', 'ecg_y8ruido', 'ecg_y10ruido', 'resp_y8ruido', 'resp_y10ruido');
+
+clearvars;

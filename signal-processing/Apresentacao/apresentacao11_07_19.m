@@ -1,53 +1,53 @@
 % Apresentação
 % Construct observation matrix UU
-clearvars; close all; clc;
+% autores: Caio Oliveira, Amanda Pereira
+% O código realiza a identificação de resposta ao impulso de um modelo
+% linear. O  modelo foi retirado, tendo apenas seus parâmetros alterados do código sss_llm.m, do autor Michael
+% Khoo, no livro Physiological Control Systems: Analysis, Simulation, and
+% Estimation, 2ª edição, John Wiley & Sons, 2018.
 
+clearvars; 
+close all; 
+clc;
 %% Load data
-load ('dadosApresentacao');
+%load ('dadosPhysionet');
+%load ('dadosPhysionetRuido');
+load ('MGHsaidas.mat')
 
+%{
+%% Create linear model 
+% Program "sss_llm.m" to produce the solution to the state-space formulation
+%    of the linear lung mechanics model to a unit step input in Pao (u)
+
+% Parameter values of model
+L = 0.01 ;  % inertance in units of cm H2O s2/L
+C = 0.1 ;   % compliance in units of L/cm H2O
+R = 1 ;     % resistance in units of cm H2O s/L
+
+T = 0.004;
+A = [0  1; -1/L/C  -R/L];
+B = [0  1/L/C]';
+t = [0:0.004:0.8]';
+u = ones(size(t));
+%}
 %% Set Parameters
-N = length(ecg_o8);
+N = length(saida001);
 p = round(N/5);
-T = 0.004; % time step
-%UU = zeros(N,p);
-
+UU = zeros(N,p);        % aloca memória
+entrada = ones(N, 1);
 %% Regressor matrix U
-entrada = [resp_y8, resp_y10, resp_o8, resp_o10];
-
 for i=1:p
     if i==1
-        UUy8(:, i)=entrada(:, 1);
+        UU(:, i)=entrada(:, 1);
     else
-        UUy8(:, i)= [zeros(i-1,1)' entrada(1:N-i+1, 1)']';
-    end
-end
-for i=1:p
-    if i==1
-        UUy10(:, i)=entrada(:, 2);
-    else
-        UUy10(:, i)= [zeros(i-1,1)' entrada(1:N-i+1, 2)']';
-    end
-end
-for i=1:p
-    if i==1
-        UUo8(:, i)=entrada(:, 3);
-    else
-        UUo8(:, i)= [zeros(i-1,1)' entrada(1:N-i+1, 3)']';
-    end
-end
-for i=1:p
-    if i==1
-        UUo10(:, i)=entrada(:, 4);
-    else
-        UUo10(:, i)= [zeros(i-1,1)' entrada(1:N-i+1, 4)']';
+        UU(:, i)= [zeros(i-1,1)' entrada(1:N-i+1, 1)']';
     end
 end
 %%
-UU = UUo8;
 UU = T*UU;
 clear i;
+
 %% Impulse response estimate (h(t))
-saida       = [ecg_y8, ecg_y10, ecg_o8, ecg_o10];
 %saida_ruido = 0;
 AA = UU'*UU;
 b = UU'*saida(:, 3);

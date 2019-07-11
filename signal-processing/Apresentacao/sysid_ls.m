@@ -16,7 +16,7 @@ if T==0,  % if T is not given, user must provide value
    T = input (' Enter sampling interval, T >>');
 end;
 disp('  Length of dataset =');
-N = min(length(y),length(u))
+N = min(length(y),length(u));
 disp(' ');
 if p==0,  % if p is not given, user must provide value
    p=input(' Enter length of system memory, p >>');
