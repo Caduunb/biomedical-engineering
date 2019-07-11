@@ -4,7 +4,7 @@ close all;
 clc;
 
 load ('MGHsaidas.mat')
-NOISE_ON = 0;
+NOISE_ON = 1;
 %% Set Parameters
 if (NOISE_ON == 1)
     saida = saida_ruido;
@@ -87,18 +87,21 @@ plot(time, h_est(interval + 1:length(h_est)-interval, 1, j), 'k', 'LineWidth', 2
 ylabel('RI estimada (V)')
 xlabel('Tempo (s)');
 
-%% Estimar a resposta ao Degrau com a RI estimada
+%% Resposta ao Degrau com a RI estimada
 j = 1;
+time = 0:T:(length(saida) - 1)*T;
 for j = 1:4
     respDegrau (:,:,j) = conv(entrada,h_est(:,:,j),'same');
     figure
     subplot(2,1,1)
-    plot(saida(:,:,j), 'LineWidth', 2);
-    ylabel('Saida estimada com o RI dado');
+    plot(time, saida(:,:,j), 'LineWidth', 2);
+    ylabel('Resposta ao degrau para a RI dado');
+    xlabel('Tempo (s)');
 
     subplot(2,1,2)
-    plot(time, respDegrau(:,:,j));
-    ylabel('Saida estimada com o RI estimado');
+    plot(time, respDegrau(:,:,j), 'LineWidth', 2);
+    ylabel('Resposta ao degrau para a RI estimado');
+    xlabel('Tempo (s)');
 end
 %% Correlação entre os impulsos estimado e medido
 %{
